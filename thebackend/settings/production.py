@@ -14,9 +14,9 @@ WSGI_APPLICATION = 'thebackend.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "datadays",
-        "USER": "datadaysuser",
-        "PASSWORD": "datadayspassword",
+        "NAME": os.getenv('DB_NAME'),
+        "USER": os.getenv('DB_USER'),
+        "PASSWORD": os.getenv('DB_PASSWORD'),
         "HOST": "postgres",
         "PORT": "5432",
     }
@@ -37,8 +37,8 @@ CSRF_COOKIE_HTTPONLY = True
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_USE_TLS = True
 EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = "sharif.datadays.3@gmail.com"
-EMAIL_HOST_PASSWORD = "datadays_branding"
+EMAIL_HOST_USER = os.getenv('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
 EMAIL_PORT = "587"
 
 import datetime

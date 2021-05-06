@@ -38,19 +38,15 @@ services:
     depends_on:
       - postgres
 
-  rabbit:
+  rabbitmq:
     image: rabbitmq
     container_name: rabbit
-    hostname: rabbit
     environment:
-      - RABBITMQ_DEFAULT_USER=admin
-      - RABBITMQ_DEFAULT_PASS=admin
-      - RABBITMQ_DEFAULT_VHOST=/
+      - RABBITMQ_DEFAULT_USER=datadays
+      - RABBITMQ_DEFAULT_PASS=herewegoagain
     ports:
-      - 5672:5672
+      # - 5672:5672
       - 15672:15672
-    volumes:
-      - rmqdata:/var/lib/rabbitmq
 
   celery_worker:
     build: 

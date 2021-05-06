@@ -47,7 +47,7 @@ SIMPLE_JWT = {
 }
 
 
-CELERY_BROKER_URL = 'amqp://localhost'
+CELERY_BROKER_URL = 'amqp://datadays:herewegoagain@rabbitmq:5672//'
 CELERY_RESULT_BACKEND = 'amqp'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'

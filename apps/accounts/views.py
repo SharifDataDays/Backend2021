@@ -33,7 +33,7 @@ class SignUpView(GenericAPIView):
                     )
             activate_user_token.save()
             context = {
-                'domain': 'datadays.sharif.edu',
+                'domain': 'datadays.ir',
                 'eid': activate_user_token.eid,
                 'token': activate_user_token.token,
             }
@@ -42,7 +42,7 @@ class SignUpView(GenericAPIView):
             msg = EmailMultiAlternatives(
                     _("Activate Account for {title}".format(title="DataDays")),
                     email_plaintext_message,
-                    "datadays.sharif@gmail.com",
+                    "datadays.sharif.ssc@gmail.com",
                     [serializer.validated_data['email']]
                 )
             msg.attach_alternative(email_html_message, "text/html")
@@ -72,7 +72,8 @@ class ActivateView(GenericAPIView):
         user.is_active = True
         user.save()
 
-        return redirect('http://datadays.sharif.edu/login')
+        # TODO: redirect to a valid address
+        return redirect('http://datadays.ir/login')
 
 
 class LogoutView(GenericAPIView):

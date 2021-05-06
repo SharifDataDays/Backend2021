@@ -55,7 +55,7 @@ services:
     container_name: worker
     command: sh -c "celery -A thebackend worker -l info -E"
     depends_on: 
-      - rabbit
+      - rabbitmq
         
   celery_beat:
     build: 
@@ -64,7 +64,7 @@ services:
     container_name: beat
     command: sh -c "celery -A thebackend beat -l info"
     depends_on: 
-      - rabbit
+      - rabbitmq
       - celery_worker
 
   postgres:

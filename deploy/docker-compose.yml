@@ -34,7 +34,7 @@ services:
         python manage.py collectstatic --noinput;
         python manage.py makemigrations;                                    
         python manage.py migrate;
-        gunicorn --workers=4 --bind 0.0.0.0:8000 thebackend.wsgi:application --log-level DEBUG;" 
+        gunicorn --workers=9 --bind 0.0.0.0:8000 thebackend.wsgi:application --log-level DEBUG;" 
     depends_on:
       - postgres
 

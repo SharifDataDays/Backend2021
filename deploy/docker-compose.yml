@@ -14,9 +14,20 @@ services:
         #- ./nginx/datadays.conf:/etc/nginx/sites-enabled/datadays
         #- ./nginx/nginx.conf:/etc/nginx/nginx.conf
         #- ./nginx/index.html:/usr/share/nginx/html/index.html
-      - /etc/letsencrypt:/etc/letsencrypt
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
     depends_on: 
       - backend_web
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+    command: certonly --email mhbahmani79@gmail.com --agree-tos --no-eff-email --staging -d datadays.ir  -d www.datadays.ir
+    depends_on:
+      - backend_nginx
 
   backend_web:
     build:

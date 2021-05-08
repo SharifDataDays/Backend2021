@@ -96,3 +96,5 @@ services:
 volumes:
   pgdata:
   rmqdata:
+  certbot-etc:
+  certbot-var:

@@ -27,27 +27,27 @@ class SignUpView(GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
 
-            activate_user_token = ActivateUserToken(
-                    token=secrets.token_urlsafe(32),
-                    eid=urlsafe_base64_encode(force_bytes(serializer.validated_data['email'])),
-                    )
-            activate_user_token.save()
-            context = {
-                'domain': 'datadays.ir',
-                'eid': activate_user_token.eid,
-                'token': activate_user_token.token,
-            }
-            email_html_message = render_to_string('accounts/email/user_activate_email.html', context)
-            email_plaintext_message = render_to_string('accounts/email/user_activate_email.txt', context)
-            msg = EmailMultiAlternatives(
-                    _("Activate Account for {title}".format(title="DataDays")),
-                    email_plaintext_message,
-                    "datadays.sharif.ssc@gmail.com",
-                    [serializer.validated_data['email']]
-                )
-            msg.attach_alternative(email_html_message, "text/html")
+            # activate_user_token = ActivateUserToken(
+            #         token=secrets.token_urlsafe(32),
+            #         eid=urlsafe_base64_encode(force_bytes(serializer.validated_data['email'])),
+            #         )
+            # activate_user_token.save()
+            # context = {
+            #     'domain': 'datadays.ir',
+            #     'eid': activate_user_token.eid,
+            #     'token': activate_user_token.token,
+            # }
+            # email_html_message = render_to_string('accounts/email/user_activate_email.html', context)
+            # email_plaintext_message = render_to_string('accounts/email/user_activate_email.txt', context)
+            # msg = EmailMultiAlternatives(
+            #         _("Activate Account for {title}".format(title="DataDays")),
+            #         email_plaintext_message,
+            #         "datadays.sharif.ssc@gmail.com",
+            #         [serializer.validated_data['email']]
+            #     )
+            # msg.attach_alternative(email_html_message, "text/html")
             try:
-                msg.send()
+                # msg.send()
 
                 serializer.save()
                 serializer.instance.is_active = False

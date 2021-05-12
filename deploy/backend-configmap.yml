@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: backend-configmap
-data:
-  DJANGO_SETTINGS_MODULE: thebackend.settings.production

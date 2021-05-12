@@ -12,11 +12,11 @@ then
     echo "PostgreSQL started"
 fi
 
-./manage.py collectstatic --noinput;
+./manage.py collectstatic --noinput
 
-./manage.py makemigrations;
-./manage.py migrate;
+./manage.py makemigrations
+./manage.py migrate
 
-gunicorn --workers=9 --bind 0.0.0.0:8000 thebackend.wsgi:application --log-level DEBUG;" 
+gunicorn --workers=9 --bind 0.0.0.0:8000 thebackend.wsgi:application
 
 exec "$@"

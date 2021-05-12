@@ -20,7 +20,7 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000
-          protocols: TCP
+          protocol: TCP
         env:
         - name: DJANGO_SETTINGS_MODULE
           valueFrom:

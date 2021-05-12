@@ -17,7 +17,7 @@ RUN pip install -r ./requirements/requirements.txt
 # RUN pip install -r ./requirements/scientific-requirements.txt
 
 # copy entrypoint.sh
-ADD ./deploy/postgres/entrypoint.sh /app/entrypoint.sh
+ADD ./deploy/entrypoint.sh /app/entrypoint.sh
 
 
 ADD ./ ./

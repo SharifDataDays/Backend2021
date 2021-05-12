@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: datadays21-backend:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        env:
+        - name: DJANGO_SETTINGS_MODULE
+          valueFrom:
+            configMapKeyRef:
+              name: backend-configmap
+              key: DJANGO_SETTINGS_MODULE

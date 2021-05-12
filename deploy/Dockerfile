@@ -24,4 +24,4 @@ ADD ./ ./
 RUN ./manage.py collectstatic --noinput
 
 # run entrypoint.sh
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["/bin/bash", "/app/entrypoint.sh"]

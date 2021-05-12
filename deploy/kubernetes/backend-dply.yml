@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+  labels:
+    app: backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      Labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: deploy_backend_web:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+          protocols: TCP
+        env:
+        - name: DJANGO_SETTINGS_MODULE
+          valueFrom:
+            configMapkeyRef:
+              name: backend-confgimap
+              key: DJANGO_SETTINGS_MODULE

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: deploy_backend_web:latest
+        image: datadays21-backend:v1
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000

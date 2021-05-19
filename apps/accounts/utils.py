@@ -27,5 +27,5 @@ def send_all_users(api):
 
     for data in serialized_info:
         r = requests.post(api, data=data)
-        if r.status_code != 200:
+        if r.status_code != 201:
             User.objects.get(username=data.get('username')).update(is_active=False)

@@ -16,9 +16,7 @@ def send_all_users(api):
                 'full_name': '{} {}'.format(user.profile.firstname_fa, user.profile.lastname_fa),
                 'full_name_english': '{} {}'.format(user.profile.firstname_en, user.profile.lastname_en),
                 'university': user.profile.uni.name,
-                'city': 'tehran',
                 'phone_number': user.profile.phone_number,
-                'gender': 1,
                 'date_of_birth': '{}T{}Z'.format(datetime.date(2019, 8, 24), datetime.time(0, 0, 0)),
             })
         except ObjectDoesNotExist:

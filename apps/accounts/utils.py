@@ -1,7 +1,11 @@
+from decouple import config
+
 from apps.accounts.models import User
 from django.core.exceptions import ObjectDoesNotExist
 import requests
 import datetime
+
+REGISTER_API = config('REGISTER_API')
 
 def send_all_users(api):
     users = User.objects.all()

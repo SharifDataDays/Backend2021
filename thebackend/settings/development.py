@@ -48,6 +48,14 @@ INSTALLED_APPS = [
     'apps.accounts',
     'apps.homepage',
     'apps.uploads',
+    'apps.blog',
+    'apps.contest',
+    'apps.go',
+    'apps.notification',
+    'apps.participation',
+    'apps.question',
+    'apps.rrank',
+    'apps.staff'
 ]
 
 MIDDLEWARE = [

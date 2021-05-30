@@ -24,10 +24,9 @@ def send_all_users(api):
                 'date_of_birth': '{}T{}Z'.format(datetime.date(2019, 8, 24), datetime.time(0, 0, 0)),
             })
         except ObjectDoesNotExist:
-            User.objects.get(username=user.username).update(is_active=False)
-            print(user.username)
+            User.objects.filter(username=user.username).update(is_active=False)
 
     for data in serialized_info:
         r = requests.post(api, data=data)
         if r.status_code != 201:
-            User.objects.get(username=data.get('username')).update(is_active=False)
+            User.objects.filter(username=data.get('username')).update(is_active=False)

@@ -1,6 +1,4 @@
 import secrets
-import requests
-import datetime
 
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -21,7 +19,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 from apps.accounts.serializers import *
 from apps.accounts.models import ResetPasswordToken, ActivateUserToken, University
-from apps.accounts.utils import REGISTER_API
+from apps.accounts.utils import register_user
 
 class SignUpView(GenericAPIView):
     queryset = Profile.objects.all()
@@ -58,24 +56,7 @@ class SignUpView(GenericAPIView):
             except Exception as e:
                 return Response({'detail': 'Invalid email or user has not been saved.'}, status=406)
 
-            user = User.objects.get(username=serializer.get('username'))
-            try:
-                data = {
-                    'username': user.username,
-                    'email': user.email,
-                    'password': user.password,
-                    'full_name': '{} {}'.format(user.profile.firstname_fa, user.profile.lastname_fa),
-                    'full_name_english': '{} {}'.format(user.profile.firstname_en, user.profile.lastname_en),
-                    'university': user.profile.uni.name,
-                    'phone_number': user.profile.phone_number,
-                    'date_of_birth': '{}T{}Z'.format(user.profile.birth_date, datetime.time(0, 0, 0)),}
-                    
-                r = requests.post(REGISTER_API, data=data)
-                if r.status_code != 201:
-                    user.update(is_active=False)
-
-            except ObjectDoesNotExist:
-                user.update(is_active=False)
+            register_user(User.objects.get(username=serializer.get('username')))
 
             return Response({'detail': 'User created successfully. Check your email for confirmation link'}, status=200)
         else:

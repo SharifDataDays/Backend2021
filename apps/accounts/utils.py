@@ -21,7 +21,7 @@ def send_all_users(api):
                 'full_name_english': '{} {}'.format(user.profile.firstname_en, user.profile.lastname_en),
                 'university': user.profile.uni.name,
                 'phone_number': user.profile.phone_number,
-                'date_of_birth': '{}T{}Z'.format(datetime.date(2019, 8, 24), datetime.time(0, 0, 0)),
+                'date_of_birth': '{}T00:00:00Z'.format(user.profile.birth_date)
             })
         except ObjectDoesNotExist:
             User.objects.filter(username=user.username).update(is_active=False)
@@ -30,3 +30,24 @@ def send_all_users(api):
         r = requests.post(api, data=data)
         if r.status_code != 201:
             User.objects.filter(username=data.get('username')).update(is_active=False)
+
+
+def register_user(user):
+    user.is_active = True
+    try:
+        data = {
+            'username': user.username,
+            'email': user.email,
+            'password': user.password,
+            'full_name': '{} {}'.format(user.profile.firstname_fa, user.profile.lastname_fa),
+            'full_name_english': '{} {}'.format(user.profile.firstname_en, user.profile.lastname_en),
+            'university': user.profile.uni.name,
+            'phone_number': user.profile.phone_number,
+            'date_of_birth': '{}T00:00:00Z'.format(user.profile.birth_date)}
+            
+        r = requests.post(REGISTER_API, data=data)
+        if r.status_code != 201:
+            user.is_active = False
+    except ObjectDoesNotExist:
+        user.is_active = True
+    user.save()

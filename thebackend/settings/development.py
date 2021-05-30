@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'apps.participation',
     'apps.question',
     'apps.rrank',
-    'apps.staff'
+    'apps.staff',
+    'apps.resources.apps.ResourcesConfig'
 ]
 
 MIDDLEWARE = [

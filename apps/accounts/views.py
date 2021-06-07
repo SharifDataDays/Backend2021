@@ -106,7 +106,7 @@ class ResetPasswordView(GenericAPIView):
         reset_password_token.save()
 
         context = {
-            'domain': 'datadays.sharif.edu',
+            'domain': 'datadays.ir',
             'username': user.username,
             'uid': reset_password_token.uid,
             'token': reset_password_token.token,

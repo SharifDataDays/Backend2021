@@ -7,7 +7,7 @@ import datetime
 
 REGISTER_API = config('REGISTER_API')
 
-def send_all_users(api):
+def send_all_users():
     users = User.objects.filter(is_active=False)
     serialized_info = []
     
@@ -26,7 +26,7 @@ def send_all_users(api):
             continue
 
     for data in serialized_info:
-        r = requests.post(api, data=data)
+        r = requests.post(REGISTER_API, data=data)
         if r.status_code == 201:
             User.objects.filter(username=data.get('username')).update(is_active=True)
 

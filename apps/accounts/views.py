@@ -56,7 +56,11 @@ class SignUpView(GenericAPIView):
             except Exception as e:
                 return Response({'detail': 'Invalid email or user has not been saved.'}, status=406)
 
-            register_user(User.objects.get(username=serializer.validated_data.get('username')))
+            register_user(
+                    user=User.objects.get(
+                        username=serializer.validated_data.get('username')),
+                    password=serializer.validated_data.get('password_1')
+            )
 
             return Response({'detail': 'User created successfully. Check your email for confirmation link'}, status=200)
         else:
